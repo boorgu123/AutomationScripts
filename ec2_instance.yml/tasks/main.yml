@@ -1,0 +1,30 @@
+---
+- name: create an ec2 instance
+  local_action:
+    module: ec2
+    key_name: "{{ key_name }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ ami id }}"
+    wait: yes
+    count: 1
+    vpc_subnet_id: "{{ subnet_id }}"
+    region: "{{ region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    assign_public_ip: yes
+  register: instance_output
+
+- name: get instance id
+  set_fact:
+    ec2id: "{{ ec2_output.instances|map(attribute='id'|list }}"
+
+- name: add tags
+  module: ec2_tag
+    region: "{{ region }}"
+    resource: "{{ ec2id }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    state: present
+    tags:
+      Name: RBASE
+      env: prod 

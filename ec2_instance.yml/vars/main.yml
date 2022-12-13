@@ -1,10 +1,10 @@
 ---
 - hosts: localhost
   vars:
-    -ansible_python_interpreter: /usr/lib/python3
-     key_name: Launch_ec2.pem
+    -ansible_python_interpreter: /usr/bin/python
+     key_name: **********
      instance_type: t2.micro
-     image: 0b0dcb5067f052a63
-     subnet_id: subnet-0c4eb07b6220dc2c0
-     aws_access_key: AKIAXTDU5SZUDOEPJT5T
-     aws_secret_key: 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
+     image: **********
+     subnet_id: **********
+     aws_access_key: **********
+     aws_secret_key: *****************
